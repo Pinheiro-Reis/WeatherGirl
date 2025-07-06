@@ -11,17 +11,16 @@ CFLAGS=-I. -Wpedantic -Wall -Wextra -g
 SRC = $(wildcard $(SRCDIR)/*.c)
 OBJ = $(patsubst $(SRCDIR)/%,$(OBJDIR)/%,$(SRC:.c=.o))
 
+all: $(BINDIR)/$(PROJ_NAME)
 
-all: $(BINDIR)/wgirl
-
-$(BINDIR)/wgirl: $(OBJ)
+$(BINDIR)/$(PROJ_NAME): $(OBJ)
 	$(CC) -o $@ $^ $(CFLAGS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c $(SRCDIR)/%.h
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-run: all
-	@$(BINDIR)/wgirl
+run: $(BINDIR)/$(PROJ_NAME)
+	@$(BINDIR)/$(PROJ_NAME)
 
 .PHONY: clean
 clean: 
